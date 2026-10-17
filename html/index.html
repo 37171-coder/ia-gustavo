@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f6f1">
+  <title>Caderno de História</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Caderno de História, início">Caderno de História</a>
+    <span class="topbar-note">História · 7º ano</span>
+  </header>
+
+  <main class="page" id="inicio">
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Caderno de História · 7º ano</p>
+        <h1 id="page-title">Conteúdos</h1>
+        <p class="intro-copy">Escolha um assunto para consultar.</p>
+      </div>
+    </section>
+
+    <div class="library-layout">
+      <nav class="topic-nav" aria-label="Matérias de História">
+        <div class="nav-title-row">
+          <h2>Assuntos</h2>
+          <span id="topic-count">6 assuntos</span>
+        </div>
+        <label class="search-box">
+          <span class="sr-only">Buscar assunto</span>
+          <input id="topic-search" type="search" placeholder="Buscar assunto..." autocomplete="off">
+        </label>
+        <div class="topic-list" id="topic-list"></div>
+      </nav>
+
+      <article class="article" aria-labelledby="topic-title">
+        <header class="article-header">
+          <p class="article-kicker" id="topic-period">Mundo antigo · Nordeste da África</p>
+          <h2 id="topic-title">O Egito e o rio Nilo</h2>
+        </header>
+        <div class="article-body">
+          <section aria-labelledby="main-idea-heading">
+            <h3 class="section-heading" id="main-idea-heading">Resumo</h3>
+            <p class="body-copy" id="topic-detail"></p>
+          </section>
+          <section class="timeline-section" aria-labelledby="timeline-heading">
+            <h3 class="section-heading" id="timeline-heading">Datas importantes</h3>
+            <div class="timeline" id="topic-timeline"></div>
+          </section>
+          <aside class="key-concept" aria-labelledby="concept-heading">
+            <span class="concept-symbol" aria-hidden="true">✳</span>
+            <div>
+              <p class="concept-label">Palavra-chave</p>
+              <h3 id="concept-heading">Cheia do Nilo</h3>
+              <p id="concept-definition"></p>
+            </div>
+          </aside>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <script>
+    const topics = [
+      {
+        id: "egito", title: "O Egito e o rio Nilo", category: "Mundo antigo", place: "Nordeste da África",
+        detail: "O Egito Antigo se desenvolveu às margens do rio Nilo. As cheias deixavam o solo fértil para o plantio. Os egípcios construíram canais e armazenavam parte da colheita. O faraó governava o território com ajuda de funcionários e sacerdotes. A maioria da população trabalhava na agricultura.",
+        dates: [["c. 3100 a.C.", "Unificação do Alto e do Baixo Egito."], ["c. 2600 a.C.", "Construção das grandes pirâmides de Gizé."], ["30 a.C.", "O Egito passa ao domínio romano."]],
+        conceptTitle: "Cheia do Nilo", concept: "Período em que o rio transbordava e deixava nutrientes no solo."
+      },
+      {
+        id: "grecia", title: "As cidades da Grécia antiga", category: "Mundo antigo", place: "Península Balcânica",
+        detail: "A Grécia antiga era formada por cidades-Estado chamadas pólis. Atenas e Esparta tinham governos e costumes diferentes. Em Atenas, os homens reconhecidos como cidadãos podiam participar das decisões políticas. Mulheres, estrangeiros e pessoas escravizadas não tinham esse direito.",
+        dates: [["c. 800 a.C.", "As pólis se fortalecem no mundo grego."], ["508 a.C.", "Reformas políticas em Atenas."], ["431–404 a.C.", "Guerra do Peloponeso entre Atenas e Esparta."]],
+        conceptTitle: "Pólis", concept: "Cidade-Estado independente, com governo e leis próprios."
+      },
+      {
+        id: "roma", title: "Roma: da cidade ao império", category: "Mundo antigo", place: "Península Itálica",
+        detail: "Roma passou por três formas de governo: monarquia, república e império. Durante a república, o Senado tinha grande influência. Patrícios e plebeus tinham direitos diferentes. Com as conquistas, Roma passou a controlar terras ao redor do mar Mediterrâneo.",
+        dates: [["753 a.C.", "Data tradicional da fundação de Roma."], ["509 a.C.", "Início da República, segundo a tradição romana."], ["27 a.C.", "Otávio Augusto se torna o primeiro imperador romano."]],
+        conceptTitle: "República", concept: "Período em que Roma era governada por magistrados e pelo Senado, não por um rei."
+      },
+      {
+        id: "idade-media", title: "A sociedade medieval", category: "Idade Média", place: "Europa ocidental",
+        detail: "Na Europa ocidental medieval, a terra era a principal fonte de riqueza. Muitos camponeses trabalhavam nas terras dos senhores e deviam obrigações a eles. A Igreja cristã tinha influência na vida das pessoas e na política. A Idade Média durou aproximadamente do século V ao XV.",
+        dates: [["476", "Fim do Império Romano do Ocidente."], ["Séculos V–X", "Formação de reinos na Europa ocidental."], ["Século XV", "Transformações que marcam o fim convencional da Idade Média."]],
+        conceptTitle: "Feudalismo", concept: "Organização da sociedade e da economia baseada na posse da terra e no trabalho rural."
+      },
+      {
+        id: "brasil-indigena", title: "Povos indígenas no Brasil", category: "História do Brasil", place: "Território brasileiro",
+        detail: "Antes da chegada dos portugueses, muitos povos já viviam no território que hoje chamamos Brasil. Eles tinham línguas, costumes e formas de organização diferentes. A colonização começou em 1500 e trouxe conflitos, doenças e mudanças para esses povos. A resistência indígena continua até hoje.",
+        dates: [["Antes de 1500", "Diversos povos vivem nos territórios do atual Brasil."], ["1500", "Chegada da expedição portuguesa liderada por Pedro Álvares Cabral."], ["Séculos seguintes", "Colonização e resistência indígena em diferentes regiões."]],
+        conceptTitle: "Povos indígenas", concept: "Há muitos povos indígenas, com línguas e culturas próprias, no Brasil de hoje."
+      },
+      {
+        id: "independencia", title: "A Independência do Brasil", category: "História do Brasil", place: "Brasil e Portugal",
+        detail: "Em 1808, a família real portuguesa mudou-se para o Rio de Janeiro. Anos depois, as Cortes portuguesas tentaram retomar o controle do Brasil. Dom Pedro declarou a independência em 7 de setembro de 1822. O Brasil deixou de ser governado por Portugal, mas a escravidão e a desigualdade continuaram.",
+        dates: [["1808", "A corte portuguesa chega ao Rio de Janeiro."], ["1820", "Revolução Liberal do Porto."], ["7 set. 1822", "Dom Pedro declara a independência do Brasil."]],
+        conceptTitle: "Independência", concept: "Separação política entre Brasil e Portugal, declarada em 1822."
+      }
+    ];
+
+    const topicList = document.querySelector("#topic-list");
+    const topicSearch = document.querySelector("#topic-search");
+    let selectedTopic = topics[0];
+
+    function renderTopicList(filter = "") {
+      const matchingTopics = topics.filter((topic) => `${topic.title} ${topic.category}`.toLocaleLowerCase("pt-BR").includes(filter.toLocaleLowerCase("pt-BR")));
+      topicList.replaceChildren();
+      if (matchingTopics.length === 0) {
+        const emptyMessage = document.createElement("p");
+        emptyMessage.className = "empty-state";
+        emptyMessage.textContent = "Nenhuma matéria encontrada.";
+        topicList.append(emptyMessage);
+        return;
+      }
+
+      matchingTopics.forEach((topic) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "topic-button";
+        button.setAttribute("aria-current", topic.id === selectedTopic.id ? "page" : "false");
+        button.innerHTML = `<span class="topic-button-copy"><span class="topic-button-title">${topic.title}</span><span class="topic-button-category">${topic.category}</span></span>`;
+        button.addEventListener("click", () => {
+          selectedTopic = topic;
+          renderTopic();
+        });
+        topicList.append(button);
+      });
+    }
+
+    function renderTopic() {
+      document.querySelector("#topic-period").textContent = `${selectedTopic.category} · ${selectedTopic.place}`;
+      document.querySelector("#topic-title").textContent = selectedTopic.title;
+      document.querySelector("#topic-detail").textContent = selectedTopic.detail;
+      document.querySelector("#concept-heading").textContent = selectedTopic.conceptTitle;
+      document.querySelector("#concept-definition").textContent = selectedTopic.concept;
+      document.querySelector("#topic-timeline").innerHTML = selectedTopic.dates.map(([date, description]) => `<div class="timeline-item"><span class="timeline-date">${date}</span><span class="timeline-description">${description}</span></div>`).join("");
+      renderTopicList(topicSearch.value);
+    }
+
+    topicSearch.addEventListener("input", () => renderTopicList(topicSearch.value));
+    document.querySelector("#topic-count").textContent = `${topics.length} assuntos`;
+    renderTopic();
+  </script>
+</body>
+</html>
